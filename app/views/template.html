@@ -3,7 +3,7 @@
     <div ng-if='pathDisplay !== "/"' style="border-right: 1px solid #aaa" class="six columns prev-div">
     <h6 style="text-align: center">Previous: {{prevPathDisplay}}</h6>
       <ul>
-            <li ng-repeat="file in prevFiles" ng-switch="notFile(file)">
+            <li ng-repeat="file in prevFiles" ng-class="{'active-item': isOpenFolder(file)}" ng-switch="notFile(file)">
                 <span ng-switch-when="true">
                     <span ng-hide="isOpenFolder(file)" class="folders icons"><i class="fa fa-folder" aria-hidden="true"></i></span>
                     <span ng-show="isOpenFolder(file)" class="folders icons open"><i class="fa fa-folder-open" aria-hidden="true"></i></span>

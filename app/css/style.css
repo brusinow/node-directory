@@ -14,8 +14,8 @@ li {
     padding-right: 5px;
 }
 
-.open {
-    color: #efe9ac;
-    margin-left: 25px;
+.active-item {
+    background-color: #eee;
 }
+
 
