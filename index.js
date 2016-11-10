@@ -6,17 +6,24 @@ var app = express();
 
 app.set('view engine', 'ejs');
 
+app.use(express.static(path.join(__dirname, 'app')));
+
 app.get("/directory", function(req, res){
-console.log(req.body);
-// var result = [];
-// fs.readdir(thisPath, (err, files) => {
-//   files.forEach(file => {
-//         console.log(file);
-//     result.push(file);
-//   });
-// console.log(result);
-// res.render("index",{result: result});
-// })
+console.log(req.query.path);
+var thisPath = req.query.path;
+console.log("current directory: ",thisPath);
+var result = [];
+fs.readdir(thisPath, (err, files) => {
+  if (files && files.length > 0){
+  files.forEach(file => {
+    result.push(file);
+  }); 
+res.send(result);
+  }
+  if (err){
+    res.send(err);
+  }
+})
 });
 
 

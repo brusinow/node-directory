@@ -1,8 +1,9 @@
 angular.module('DirectoryServices', ['ngResource'])
 
-.factory('DirectoryService', function(){
-    return function(path){
-      // console.log("what's id? ",productId);
+
+.factory('DirService', ["$http", "$q", function($http, $q){
+  return function(path){
+      var deferred = $q.defer();
       var req = {
         method: 'GET',
         url: '/directory',
@@ -12,7 +13,8 @@ angular.module('DirectoryServices', ['ngResource'])
       }
       $http(req).success(function(data){
         // console.log("success!!!")
-        return(data);
+        deferred.resolve(data);
       })
+      return deferred.promise;
     }
-})
+}])

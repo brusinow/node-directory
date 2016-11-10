@@ -1,0 +1,7 @@
+<h3>Current Directory Path: {{pathDisplay}}</h3>
+<ul>
+<li ng-repeat="file in files" ng-switch="notFile(file)">
+    <a ng-href="{{path}}/{{file}}" ng-switch-when="true">{{file}}</a>
+    <span ng-switch-when="false">{{file}}</span>
+</li>
+</ul>
