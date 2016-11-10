@@ -10,24 +10,19 @@ app.config([
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-  .state('first', {
+  .state('home', {
     cache: false,
     url: '/',
     templateUrl: 'views/template.html',
     controller: 'MainCtrl'
   })
-  .state('second', {
+  .state('files', {
     cache: false,
-    url: '/:firstLevel',
+    url: '/{folderPath:.*}',
     templateUrl: 'views/template.html',
     controller: 'MainCtrl'
   })
-  .state('third', {
-  cache: false,
-  url: '/:firstLevel/:secondLevel',
-  templateUrl: 'views/template.html',
-  controller: 'MainCtrl'
-  })
+  
 
     $locationProvider.html5Mode(true);
 
