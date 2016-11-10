@@ -1,6 +1,6 @@
 
 <div class="row">
-    <div ng-if='pathDisplay !== "/"' class="six columns">
+    <div ng-if='pathDisplay !== "/"' style="border-right: 2px solid #777" class="six columns prev-div">
     <h6 style="text-align: center">Previous: {{prevPathDisplay}}</h6>
       <ul>
             <li ng-repeat="file in prevFiles" ng-switch="notFile(file)">
@@ -11,7 +11,8 @@
     </div>
     <div class="six columns">
     <h6 style="text-align: center">Current: {{pathDisplay}}</h6>
-        <ul>
+        <h5 style="text-align: center" ng-if="currentFiles.length === 0">No files in this directory.</h5
+        <ul ng-if="currentFiles.length >= 1">
             <li ng-repeat="file in currentFiles" ng-switch="notFile(file)">
                 <span ng-switch-when="true"><span class="folders icons"><i class="fa fa-folder" aria-hidden="true"></i></span><a ng-href="{{path}}/{{file}}" >{{file}}</a></span>
                 <span ng-switch-when="false"><i class="fa fa-file-o icons" aria-hidden="true"></i> {{file}}</span>
