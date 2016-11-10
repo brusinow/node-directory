@@ -9,11 +9,8 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'app')));
 
 app.get("/directory", function(req, res){
-console.log(req.query.path);
 var thisPath = req.query.current;
 var prevPath = req.query.prev;
-console.log("current directory: ",thisPath);
-console.log("prev path is: ",prevPath);
 var thisResult = [];
 var prevResult = [];
 fs.readdir(thisPath, (err, theseFiles) => {
@@ -23,7 +20,7 @@ fs.readdir(thisPath, (err, theseFiles) => {
     }); 
   }
   fs.readdir(prevPath.toString(), (err, prevFiles) => {
-    console.log("what is thisResult array?",thisResult);
+
     if (prevFiles && prevFiles.length > 0){
       prevFiles.forEach(prevFile => {
         prevResult.push(prevFile);
