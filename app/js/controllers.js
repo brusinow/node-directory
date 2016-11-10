@@ -1,8 +1,6 @@
 angular.module('DirectoryCtrls', ['DirectoryServices'])
 
 .controller('MainCtrl', ['$scope', '$location','$stateParams','DirService', function($scope, $location, $stateParams, DirService) {
-    console.log("location: ",$location);
-    console.log("state params: ",$stateParams);
     var path = $location.$$path;
     $scope.pathDisplay = $location.$$path;
     if ($location.$$path === "/"){
@@ -11,6 +9,9 @@ angular.module('DirectoryCtrls', ['DirectoryServices'])
         $scope.path = $location.$$path;
     }
    var splitPath = $location.$$path.split("/");
+   var openFolder = splitPath[splitPath.length - 1];
+
+
 
    splitPath.pop();
    var prevPath = splitPath.join("/");
@@ -30,6 +31,14 @@ angular.module('DirectoryCtrls', ['DirectoryServices'])
         $scope.prevFiles = data.prev;
     
     });
+
+       $scope.isOpenFolder = function(file){
+       if (openFolder === file){
+           return true;
+       } else {
+           return false;
+       }
+   }
 
 
     $scope.notFile = function(file){
