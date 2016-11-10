@@ -10,32 +10,35 @@ angular.module('DirectoryCtrls', ['DirectoryServices'])
     } else {
         $scope.path = $location.$$path;
     }
-    
+   var splitPath = $location.$$path.split("/");
 
-    $scope.$watch('path', function(newValue, oldValue) {
-        if ($scope.path === "/"){
-            $scope.path === "";
-        }
-    });
-    // $scope.path = function(path){
-    //     if (path === "/"){
-    //         console.log("path is /");
-    //         return "";
-    //     } else {
-    //         console.log("actual path");
-    //         return $location.$$path;
-    //     }
-    // }
-    DirService(path).then(function(data){
-        $scope.files = data;
+   splitPath.pop();
+   var prevPath = splitPath.join("/");
+   if (prevPath === ""){
+       prevPath = "/";
+   }
+   
+   $scope.prevPath = prevPath;
+   $scope.prevPathDisplay = prevPath;
+   if ($scope.prevPath = "/"){
+       $scope.prevPath = "";
+   }
+    
+    DirService(path, prevPath).then(function(data){
+        console.log(data);
+        $scope.currentFiles = data.current;
+        $scope.prevFiles = data.prev;
+    
     });
 
 
     $scope.notFile = function(file){
-        if (file.indexOf(".") > -1){
-            return false;
-        } else {
-            return true;
+        if (file.length > 0){
+            if (file.indexOf(".") > -1){
+                return false;
+            } else {
+                return true;
+            }
         }
     }
     

@@ -10,21 +10,37 @@ app.use(express.static(path.join(__dirname, 'app')));
 
 app.get("/directory", function(req, res){
 console.log(req.query.path);
-var thisPath = req.query.path;
+var thisPath = req.query.current;
+var prevPath = req.query.prev;
 console.log("current directory: ",thisPath);
-var result = [];
-fs.readdir(thisPath, (err, files) => {
-  if (files && files.length > 0){
-  files.forEach(file => {
-    result.push(file);
-  }); 
-res.send(result);
+console.log("prev path is: ",prevPath);
+var thisResult = [];
+var prevResult = [];
+fs.readdir(thisPath, (err, theseFiles) => {
+  if (theseFiles && theseFiles.length > 0){
+    theseFiles.forEach(thisFile => {
+    thisResult.push(thisFile);
+    }); 
   }
-  if (err){
-    res.send(err);
-  }
+  fs.readdir(prevPath.toString(), (err, prevFiles) => {
+    console.log("what is thisResult array?",thisResult);
+    if (prevFiles && prevFiles.length > 0){
+      prevFiles.forEach(prevFile => {
+        prevResult.push(prevFile);
+      })
+       res.send({
+    current: thisResult,
+    prev: prevResult
+    })
+    }
+    
+  })
+  
+ 
 })
 });
+
+
 
 
 app.get('/*', function(req, res) {
